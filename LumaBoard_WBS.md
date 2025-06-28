@@ -6,19 +6,19 @@
 
 ## Phase 1: Core Application Framework
 
-- [ ] **1.1 Config Loader**
+- [x] **1.1 Config Loader**
   - **Description:** Implement a module to load, parse, and validate JSON config from file, URL, or localStorage.
   - **Definition of Done:** `src/configLoader.js` exists, loads config, validates against schema, and handles errors.
   - **Verification:** Unit tests in `test/configLoader.spec.js` cover valid, invalid, and missing configs.
   - **Deliverable:** `src/configLoader.js`, `test/configLoader.spec.js`
 
-- [ ] **1.2 Scene Engine**
+- [x] **1.2 Scene Engine**
   - **Description:** Implement scene rendering and rotation logic based on config.
   - **Definition of Done:** `src/sceneEngine.js` renders scenes, rotates per schedule, and supports layout.
   - **Verification:** Unit tests in `test/sceneEngine.spec.js` verify scene transitions and layout rendering.
   - **Deliverable:** `src/sceneEngine.js`, `test/sceneEngine.spec.js`
 
-- [ ] **1.3 Widget Mounting System**
+- [x] **1.3 Widget Mounting System**
   - **Description:** Dynamically instantiate and mount widgets as defined in config.
   - **Definition of Done:** `src/widgetMount.js` creates widgets, passes config, and supports positioning.
   - **Verification:** Unit tests in `test/widgetMount.spec.js` verify correct widget instantiation and config passing.

@@ -1,6 +1,11 @@
 import { test, expect } from '@playwright/test';
 
 test('homepage loads', async ({ page }) => {
-  await page.goto('/index.html');
-  await expect(page.locator('h1')).toHaveText('Welcome to LumaBoard');
+  await page.goto('http://localhost:5173');
+  
+  // Check if the scene container exists
+  await expect(page.locator('.scene-container')).toBeVisible();
+  
+  // Check if widgets are rendered
+  await expect(page.locator('clock-widget')).toBeVisible();
 }); 
