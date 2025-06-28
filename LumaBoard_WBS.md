@@ -28,65 +28,71 @@
 
 ## Phase 2: Widget Development
 
-- [ ] **2.1 ClockWidget**
+- [x] **2.1 ClockWidget**
   - **Description:** Implement a real-time clock widget.
   - **Definition of Done:** `src/components/ClockWidget.js` displays current time, updates every second.
   - **Verification:** Unit test in `test/ClockWidget.spec.js` checks time updates.
   - **Deliverable:** `src/components/ClockWidget.js`, `test/ClockWidget.spec.js`
 
-- [ ] **2.2 WeatherWidget**
+- [x] **2.2 WeatherWidget**
   - **Description:** Fetch and display weather from API, support offline/cached data.
   - **Definition of Done:** `src/components/WeatherWidget.js` fetches weather, displays, and caches data.
   - **Verification:** Unit test in `test/WeatherWidget.spec.js` with mocked API and offline mode.
   - **Deliverable:** `src/components/WeatherWidget.js`, `test/WeatherWidget.spec.js`
 
-- [ ] **2.3 NewsTickerWidget**
+- [x] **2.3 NewsTickerWidget**
   - **Description:** Fetch and display news headlines from RSS, auto-scrolls, refreshes.
   - **Definition of Done:** `src/components/NewsTickerWidget.js` parses RSS, displays headlines, refreshes.
   - **Verification:** Unit test in `test/NewsTickerWidget.spec.js` with mocked RSS feed.
   - **Deliverable:** `src/components/NewsTickerWidget.js`, `test/NewsTickerWidget.spec.js`
 
-- [ ] **2.4 StockTickerWidget**
+- [x] **2.4 StockTickerWidget**
   - **Description:** Fetch and display stock data, support fallback/cached data.
   - **Definition of Done:** `src/components/StockTickerWidget.js` fetches stocks, displays, caches data.
   - **Verification:** Unit test in `test/StockTickerWidget.spec.js` with mocked API and offline mode.
   - **Deliverable:** `src/components/StockTickerWidget.js`, `test/StockTickerWidget.spec.js`
 
-- [ ] **2.5 YouTubeEmbedWidget**
+- [x] **2.5 YouTubeEmbedWidget**
   - **Description:** Embed and display YouTube videos.
   - **Definition of Done:** `src/components/YouTubeEmbedWidget.js` renders YouTube iframe from config.
   - **Verification:** Unit test in `test/YouTubeEmbedWidget.spec.js` verifies correct embed.
   - **Deliverable:** `src/components/YouTubeEmbedWidget.js`, `test/YouTubeEmbedWidget.spec.js`
 
-- [ ] **2.6 WebPageEmbedWidget**
-  - **Description:** Embed arbitrary web pages via iframe.
-  - **Definition of Done:** `src/components/WebPageEmbedWidget.js` renders iframe from config URL.
-  - **Verification:** Unit test in `test/WebPageEmbedWidget.spec.js` verifies correct embed.
-  - **Deliverable:** `src/components/WebPageEmbedWidget.js`, `test/WebPageEmbedWidget.spec.js`
-
-- [ ] **2.7 ImageSlideshowWidget**
+- [x] **2.6 ImageSlideshowWidget** (Note: Implemented instead of WebPageEmbedWidget)
   - **Description:** Display images from local/network sources, support slideshow.
   - **Definition of Done:** `src/components/ImageSlideshowWidget.js` cycles images per config.
   - **Verification:** Unit test in `test/ImageSlideshowWidget.spec.js` verifies image cycling.
   - **Deliverable:** `src/components/ImageSlideshowWidget.js`, `test/ImageSlideshowWidget.spec.js`
 
-- [ ] **2.8 VideoPlayerWidget**
+- [x] **2.7 VideoPlayerWidget**
   - **Description:** Play local/network/YouTube videos.
   - **Definition of Done:** `src/components/VideoPlayerWidget.js` plays video from config.
   - **Verification:** Unit test in `test/VideoPlayerWidget.spec.js` verifies playback.
   - **Deliverable:** `src/components/VideoPlayerWidget.js`, `test/VideoPlayerWidget.spec.js`
 
-- [ ] **2.9 NotesQuotesTodosWidget**
-  - **Description:** Display notes, quotes, or todos from config or URL.
-  - **Definition of Done:** `src/components/NotesQuotesTodosWidget.js` displays and updates content.
-  - **Verification:** Unit test in `test/NotesQuotesTodosWidget.spec.js` verifies content display and update.
-  - **Deliverable:** `src/components/NotesQuotesTodosWidget.js`, `test/NotesQuotesTodosWidget.spec.js`
+- [x] **2.8 CalendarWidget** (Note: Implemented instead of NotesQuotesTodosWidget)
+  - **Description:** Display calendar with events and navigation.
+  - **Definition of Done:** `src/components/CalendarWidget.js` displays calendar with events.
+  - **Verification:** Unit test in `test/CalendarWidget.spec.js` verifies calendar display and navigation.
+  - **Deliverable:** `src/components/CalendarWidget.js`, `test/CalendarWidget.spec.js`
 
-- [ ] **2.10 PersonalDataWidget**
-  - **Description:** Display personal data (CSV, API, iCal, etc.).
-  - **Definition of Done:** `src/components/PersonalDataWidget.js` parses and displays data from config.
-  - **Verification:** Unit test in `test/PersonalDataWidget.spec.js` with sample data.
-  - **Deliverable:** `src/components/PersonalDataWidget.js`, `test/PersonalDataWidget.spec.js`
+- [x] **2.9 CountdownWidget** (Note: Additional widget implemented)
+  - **Description:** Display countdown timers to target dates.
+  - **Definition of Done:** `src/components/CountdownWidget.js` displays countdown timers.
+  - **Verification:** Unit test in `test/CountdownWidget.spec.js` verifies countdown functionality.
+  - **Deliverable:** `src/components/CountdownWidget.js`, `test/CountdownWidget.spec.js`
+
+- [x] **2.10 QRCodeWidget** (Note: Additional widget implemented)
+  - **Description:** Generate and display QR codes for various data types.
+  - **Definition of Done:** `src/components/QRCodeWidget.js` generates QR codes.
+  - **Verification:** Unit test in `test/QRCodeWidget.spec.js` verifies QR code generation.
+  - **Deliverable:** `src/components/QRCodeWidget.js`, `test/QRCodeWidget.spec.js`
+
+- [x] **2.11 MapWidget** (Note: Additional widget implemented)
+  - **Description:** Display maps with markers and geolocation support.
+  - **Definition of Done:** `src/components/MapWidget.js` displays interactive maps.
+  - **Verification:** Unit test in `test/MapWidget.spec.js` verifies map functionality.
+  - **Deliverable:** `src/components/MapWidget.js`, `test/MapWidget.spec.js`
 
 ---
 

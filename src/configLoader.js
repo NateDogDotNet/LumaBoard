@@ -16,7 +16,17 @@ export async function loadConfig(options = {}) {
       configText = localStorage.getItem(options.localStorageKey);
       if (!configText) throw new Error('No config found in localStorage');
     } else {
-      throw new Error('No config source specified');
+      // Default: try to load the phase2 demo config
+      try {
+        const res = await fetch('./config/phase2-demo-config.json');
+        if (res.ok) {
+          configText = await res.text();
+        } else {
+          throw new Error('Default config not found');
+        }
+      } catch (err) {
+        throw new Error('No config source specified and default config unavailable');
+      }
     }
     const config = JSON.parse(configText);
     validateConfig(config);
