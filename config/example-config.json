@@ -1,0 +1,15 @@
+{
+  "scenes": [
+    {
+      "name": "Welcome",
+      "duration": 15,
+      "layout": "grid-2x2",
+      "widgets": [
+        { "type": "clock", "id": "clock-1" },
+        { "type": "weather", "config": { "location": "Minneapolis" } }
+      ]
+    }
+  ],
+  "theme": { "font": "Inter", "color": "#333" },
+  "schedule": { "default": ["Welcome"] }
+} 
