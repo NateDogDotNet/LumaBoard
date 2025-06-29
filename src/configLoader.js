@@ -16,16 +16,31 @@ export async function loadConfig(options = {}) {
       configText = localStorage.getItem(options.localStorageKey);
       if (!configText) throw new Error('No config found in localStorage');
     } else {
-      // Default: try to load the phase2 demo config
-      try {
-        const res = await fetch('./config/phase2-demo-config.json');
-        if (res.ok) {
-          configText = await res.text();
-        } else {
-          throw new Error('Default config not found');
+      // Default: try to load configs in order of preference
+      const configSources = [
+        './config/phase3-demo-config.json',  // Phase 3 Demo configuration
+        './config/phase2-demo-config.json',  // Phase 2 Demo configuration
+        './config/config.json',              // User configuration
+        './config/example-config.json'       // Example configuration
+      ];
+      
+      let configLoaded = false;
+      for (const source of configSources) {
+        try {
+          const res = await fetch(source);
+          if (res.ok) {
+            configText = await res.text();
+            configLoaded = true;
+            console.log(`ConfigLoader: Loaded configuration from ${source}`);
+            break;
+          }
+        } catch (err) {
+          // Continue to next source
         }
-      } catch (err) {
-        throw new Error('No config source specified and default config unavailable');
+      }
+      
+      if (!configLoaded) {
+        throw new Error('No config source specified and no default config available');
       }
     }
     const config = JSON.parse(configText);

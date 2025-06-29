@@ -329,6 +329,14 @@ export class SceneEngine {
   }
 
   /**
+   * Get the widget mount instance
+   * @returns {Object} Widget mount instance
+   */
+  get widgetMount() {
+    return widgetMount;
+  }
+
+  /**
    * Refresh all widgets in the current scene
    */
   refreshCurrentScene() {

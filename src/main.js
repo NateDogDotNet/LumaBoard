@@ -3,6 +3,13 @@ import './styles/main.css';
 import { loadConfig } from './configLoader.js';
 import { SceneEngine } from './sceneEngine.js';
 import { WidgetMount } from './widgetMount.js';
+import { DebugOverlay } from './components/DebugOverlay.js';
+import { SceneScheduler } from './components/SceneScheduler.js';
+import { SceneTransitions } from './components/SceneTransitions.js';
+import { OfflineFallback } from './components/OfflineFallback.js';
+import { animationEngine } from './components/AnimationEngine.js';
+import { ConfigManager } from './components/ConfigManager.js';
+import { BurnInProtection } from './components/BurnInProtection.js';
 
 // Import all widget components
 import './components/ClockWidget.js';
@@ -25,7 +32,15 @@ class LumaBoard {
   constructor() {
     this.config = null;
     this.sceneEngine = null;
+    this.debugOverlay = null;
+    this.sceneScheduler = null;
+    this.sceneTransitions = null;
+    this.offlineFallback = null;
+    this.animationEngine = null;
+    this.configManager = null;
+    this.burnInProtection = null;
     this.isInitialized = false;
+    this.startTime = Date.now();
   }
 
   /**
@@ -110,6 +125,27 @@ class LumaBoard {
     
     // Set up periodic refresh
     this.setupPeriodicRefresh();
+    
+    // Initialize debug overlay
+    this.setupDebugOverlay();
+    
+    // Initialize scene scheduler
+    this.setupSceneScheduler();
+    
+    // Initialize scene transitions
+    this.setupSceneTransitions();
+    
+    // Initialize offline fallback
+    this.setupOfflineFallback();
+    
+    // Initialize animation engine
+    this.setupAnimationEngine();
+    
+    // Initialize config manager
+    this.setupConfigManager();
+    
+    // Initialize burn-in protection
+    this.setupBurnInProtection();
     
     console.log('LumaBoard: Application started successfully');
   }
@@ -255,6 +291,79 @@ class LumaBoard {
   }
 
   /**
+   * Set up debug overlay
+   */
+  setupDebugOverlay() {
+    this.debugOverlay = new DebugOverlay(this);
+    console.log('LumaBoard: Debug overlay initialized (Ctrl+Shift+D to toggle)');
+  }
+
+  /**
+   * Set up scene scheduler
+   */
+  setupSceneScheduler() {
+    const schedulerConfig = this.config.scheduler || {};
+    this.sceneScheduler = new SceneScheduler(this.sceneEngine, schedulerConfig);
+    console.log('LumaBoard: Scene scheduler initialized');
+  }
+
+  /**
+   * Set up scene transitions
+   */
+  setupSceneTransitions() {
+    const appContainer = document.getElementById('app');
+    const transitionConfig = this.config.transitions || {};
+    this.sceneTransitions = new SceneTransitions(appContainer, transitionConfig);
+    console.log('LumaBoard: Scene transitions initialized');
+  }
+
+  /**
+   * Set up offline fallback
+   */
+  setupOfflineFallback() {
+    const offlineConfig = this.config.offline || {};
+    this.offlineFallback = new OfflineFallback(offlineConfig);
+    this.offlineFallback.setSceneEngine(this.sceneEngine);
+    console.log('LumaBoard: Offline fallback initialized');
+  }
+
+  /**
+   * Set up animation engine
+   */
+  setupAnimationEngine() {
+    this.animationEngine = animationEngine;
+    
+    // Apply global animation options from config
+    if (this.config.animations) {
+      this.animationEngine.updateGlobalOptions(this.config.animations.global || {});
+    }
+    
+    console.log('LumaBoard: Animation engine initialized');
+  }
+
+  /**
+   * Set up config manager
+   */
+  setupConfigManager() {
+    this.configManager = new ConfigManager(this);
+    console.log('LumaBoard: Config manager initialized (Ctrl+Shift+C to toggle)');
+  }
+
+  /**
+   * Set up burn-in protection
+   */
+  setupBurnInProtection() {
+    const burnInConfig = this.config.burnInProtection || {};
+    this.burnInProtection = new BurnInProtection(this);
+    
+    if (burnInConfig) {
+      this.burnInProtection.updateConfig(burnInConfig);
+    }
+    
+    console.log('LumaBoard: Burn-in protection initialized');
+  }
+
+  /**
    * Get application uptime
    * @returns {string} Formatted uptime
    */
@@ -335,6 +444,41 @@ class LumaBoard {
    * Destroy the application and cleanup resources
    */
   destroy() {
+    if (this.burnInProtection) {
+      this.burnInProtection.destroy();
+      this.burnInProtection = null;
+    }
+    
+    if (this.configManager) {
+      this.configManager.destroy();
+      this.configManager = null;
+    }
+    
+    if (this.animationEngine) {
+      this.animationEngine.destroy();
+      this.animationEngine = null;
+    }
+    
+    if (this.offlineFallback) {
+      this.offlineFallback.destroy();
+      this.offlineFallback = null;
+    }
+    
+    if (this.sceneTransitions) {
+      this.sceneTransitions.destroy();
+      this.sceneTransitions = null;
+    }
+    
+    if (this.sceneScheduler) {
+      this.sceneScheduler.destroy();
+      this.sceneScheduler = null;
+    }
+    
+    if (this.debugOverlay) {
+      this.debugOverlay.destroy();
+      this.debugOverlay = null;
+    }
+    
     if (this.sceneEngine) {
       this.sceneEngine.destroy();
       this.sceneEngine = null;

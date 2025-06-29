@@ -10,6 +10,7 @@ import { CalendarWidget } from './components/CalendarWidget.js';
 import { CountdownWidget } from './components/CountdownWidget.js';
 import { QRCodeWidget } from './components/QRCodeWidget.js';
 import { MapWidget } from './components/MapWidget.js';
+import { freshnessManager } from './components/FreshnessIndicator.js';
 
 /**
  * Widget mounting system for LumaBoard
@@ -71,6 +72,9 @@ export class WidgetMount {
         config: config,
         container: container
       });
+
+      // Add freshness indicator for data widgets
+      this.addFreshnessIndicator(widgetElement, type);
 
       console.log(`WidgetMount: Created ${type} widget with ID ${widgetId}`);
       return widgetElement;
@@ -228,6 +232,10 @@ export class WidgetMount {
     const widget = this.widgets.get(widgetId);
     if (widget && widget.element && typeof widget.element.refresh === 'function') {
       widget.element.refresh();
+      
+      // Update freshness indicator
+      freshnessManager.markWidgetUpdated(widget.element);
+      
       console.log(`WidgetMount: Refreshed widget ${widgetId}`);
     }
   }
@@ -273,6 +281,32 @@ export class WidgetMount {
    */
   isWidgetTypeSupported(type) {
     return this.widgetRegistry.hasOwnProperty(type);
+  }
+
+  /**
+   * Add freshness indicator to data widgets
+   * @param {HTMLElement} widgetElement - Widget element
+   * @param {string} type - Widget type
+   */
+  addFreshnessIndicator(widgetElement, type) {
+    // Only add freshness indicators to data widgets that fetch external data
+    const dataWidgets = ['weather', 'news', 'stocks', 'map'];
+    
+    if (dataWidgets.includes(type)) {
+      // Wait for widget to be fully initialized
+      setTimeout(() => {
+        freshnessManager.addIndicator(widgetElement, {
+          position: 'top-right',
+          showAge: true,
+          showIcon: true,
+          threshold: {
+            fresh: 30000,    // 30 seconds
+            stale: 300000,   // 5 minutes
+            expired: 900000  // 15 minutes
+          }
+        });
+      }, 1000);
+    }
   }
 }
 

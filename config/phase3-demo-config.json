@@ -1,0 +1,297 @@
+{
+  "scenes": [
+    {
+      "name": "Essential Dashboard",
+      "duration": 30,
+      "layout": "2x2",
+      "background": {
+        "type": "gradient",
+        "value": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+      },
+      "widgets": [
+        {
+          "type": "clock",
+          "position": 0,
+          "config": {
+            "format": "12",
+            "timezone": "America/New_York",
+            "showDate": true,
+            "dateFormat": "long"
+          }
+        },
+        {
+          "type": "weather",
+          "position": 1,
+          "config": {
+            "location": "New York, NY",
+            "units": "metric",
+            "showForecast": true
+          }
+        },
+        {
+          "type": "news",
+          "position": 2,
+          "config": {
+            "sources": [
+              "https://feeds.npr.org/1001/rss.xml"
+            ],
+            "scrollSpeed": 50,
+            "maxItems": 10
+          }
+        },
+        {
+          "type": "stocks",
+          "position": 3,
+          "config": {
+            "symbols": ["AAPL", "GOOGL", "MSFT", "TSLA"],
+            "refreshInterval": 300000
+          }
+        }
+      ]
+    },
+    {
+      "name": "Media Center",
+      "duration": 45,
+      "layout": "2x2",
+      "background": {
+        "type": "gradient",
+        "value": "linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)"
+      },
+      "widgets": [
+        {
+          "type": "youtube",
+          "position": 0,
+          "config": {
+            "videoId": "dQw4w9WgXcQ",
+            "autoplay": false,
+            "mute": true,
+            "controls": true
+          }
+        },
+        {
+          "type": "image-slideshow",
+          "position": 1,
+          "config": {
+            "images": [
+              {
+                "url": "https://picsum.photos/800/600?random=1",
+                "caption": "Beautiful Landscape 1"
+              },
+              {
+                "url": "https://picsum.photos/800/600?random=2",
+                "caption": "Beautiful Landscape 2"
+              },
+              {
+                "url": "https://picsum.photos/800/600?random=3",
+                "caption": "Beautiful Landscape 3"
+              }
+            ],
+            "interval": 5000,
+            "transition": "fade",
+            "showControls": true,
+            "showIndicators": true
+          }
+        },
+        {
+          "type": "video",
+          "position": 2,
+          "config": {
+            "videos": [
+              {
+                "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                "title": "Big Buck Bunny",
+                "poster": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg"
+              }
+            ],
+            "autoplay": false,
+            "muted": true,
+            "showPlaylist": true
+          }
+        },
+        {
+          "type": "qrcode",
+          "position": 3,
+          "config": {
+            "data": "https://github.com/your-repo/lumaboard",
+            "size": 200,
+            "foregroundColor": "#000000",
+            "backgroundColor": "#ffffff",
+            "errorCorrectionLevel": "M"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Productivity Hub",
+      "duration": 60,
+      "layout": "3x3",
+      "background": {
+        "type": "gradient",
+        "value": "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"
+      },
+      "widgets": [
+        {
+          "type": "calendar",
+          "position": 0,
+          "config": {
+            "showWeekNumbers": true,
+            "startOfWeek": 1,
+            "events": [
+              {
+                "date": "2024-01-15",
+                "title": "Project Deadline",
+                "color": "#ff4757"
+              },
+              {
+                "date": "2024-01-20",
+                "title": "Team Meeting",
+                "color": "#3742fa"
+              }
+            ]
+          }
+        },
+        {
+          "type": "countdown",
+          "position": 1,
+          "config": {
+            "targets": [
+              {
+                "name": "New Year 2025",
+                "date": "2025-01-01T00:00:00Z",
+                "timezone": "America/New_York"
+              },
+              {
+                "name": "Project Launch",
+                "date": "2024-03-15T09:00:00Z",
+                "timezone": "America/New_York"
+              }
+            ],
+            "format": "digital",
+            "showCompleted": true
+          }
+        },
+        {
+          "type": "map",
+          "position": 2,
+          "config": {
+            "center": {
+              "lat": 40.7128,
+              "lng": -74.0060
+            },
+            "zoom": 12,
+            "markers": [
+              {
+                "lat": 40.7128,
+                "lng": -74.0060,
+                "title": "New York City",
+                "description": "The Big Apple"
+              }
+            ],
+            "provider": "osm"
+          }
+        }
+      ]
+    }
+  ],
+  "sceneRotation": {
+    "enabled": true,
+    "interval": 30
+  },
+  "refreshInterval": 300,
+  "theme": {
+    "font": "Inter, system-ui, sans-serif",
+    "primaryColor": "#667eea",
+    "backgroundColor": "#f8fafc",
+    "textColor": "#1a202c"
+  },
+  "scheduler": {
+    "enabled": false,
+    "timezone": "America/New_York",
+    "schedules": []
+  },
+  "transitions": {
+    "enabled": true,
+    "defaultTransition": "fade",
+    "duration": 1000,
+    "easing": "ease-in-out"
+  },
+  "offline": {
+    "enabled": true,
+    "cacheStrategy": "aggressive",
+    "retryAttempts": 3,
+    "retryDelay": 5000
+  },
+  "debug": {
+    "enabled": true,
+    "showFreshnessIndicators": true,
+    "logLevel": "info"
+  },
+  "settings": {
+    "enableKeyboardControls": true,
+    "showInfoOverlay": true,
+    "autoHideControls": true,
+    "preventScreenBurn": true
+  },
+  "animations": {
+    "global": {
+      "duration": 800,
+      "easing": "ease-out",
+      "delay": 0
+    },
+    "widgetEntrance": {
+      "type": "css",
+      "name": "fadeInUp",
+      "duration": 600
+    },
+    "sceneTransition": {
+      "type": "css", 
+      "name": "fadeIn",
+      "duration": 1000
+    },
+    "dataUpdate": {
+      "type": "css",
+      "name": "pulse",
+      "duration": 600,
+      "iterations": 2
+    }
+  },
+  "burnInProtection": {
+    "enabled": true,
+    "pixelShift": {
+      "enabled": true,
+      "interval": 30000,
+      "maxShift": 3,
+      "duration": 1000
+    },
+    "logoShift": {
+      "enabled": true,
+      "interval": 60000,
+      "maxShift": 10,
+      "duration": 2000
+    },
+    "screenSaver": {
+      "enabled": true,
+      "activateAfter": 1800000,
+      "type": "geometric",
+      "duration": 300000
+    },
+    "dimming": {
+      "enabled": true,
+      "nightMode": {
+        "startTime": "22:00",
+        "endTime": "06:00",
+        "dimLevel": 0.3
+      },
+      "idleDimming": {
+        "enabled": true,
+        "activateAfter": 600000,
+        "dimLevel": 0.7
+      }
+    },
+    "contentRotation": {
+      "enabled": true,
+      "staticElementDetection": true,
+      "rotateAfter": 3600000
+    }
+  }
+} 
