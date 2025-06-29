@@ -10,6 +10,10 @@ import { OfflineFallback } from './components/OfflineFallback.js';
 import { animationEngine } from './components/AnimationEngine.js';
 import { ConfigManager } from './components/ConfigManager.js';
 import { BurnInProtection } from './components/BurnInProtection.js';
+import { themeEngine } from './theme.js';
+import { layoutEngine } from './components/LayoutEngine.js';
+import { cssCustomizer } from './components/CSSCustomizer.js';
+import { themeManager } from './components/ThemeManager.js';
 
 // Import all widget components
 import './components/ClockWidget.js';
@@ -39,6 +43,10 @@ class LumaBoard {
     this.animationEngine = null;
     this.configManager = null;
     this.burnInProtection = null;
+    this.themeEngine = null;
+    this.layoutEngine = null;
+    this.cssCustomizer = null;
+    this.themeManager = null;
     this.isInitialized = false;
     this.startTime = Date.now();
   }
@@ -146,6 +154,12 @@ class LumaBoard {
     
     // Initialize burn-in protection
     this.setupBurnInProtection();
+    
+    // Initialize Phase 4 features
+    this.setupThemeEngine();
+    this.setupLayoutEngine();
+    this.setupCSSCustomizer();
+    this.setupThemeManager();
     
     console.log('LumaBoard: Application started successfully');
   }
@@ -361,6 +375,50 @@ class LumaBoard {
     }
     
     console.log('LumaBoard: Burn-in protection initialized');
+  }
+
+  /**
+   * Set up theme engine
+   */
+  setupThemeEngine() {
+    this.themeEngine = themeEngine;
+    
+    // Apply theme from config
+    if (this.config.theme) {
+      this.themeEngine.applyTheme(this.config.theme);
+    }
+    
+    console.log('LumaBoard: Theme engine initialized');
+  }
+
+  /**
+   * Set up layout engine
+   */
+  setupLayoutEngine() {
+    this.layoutEngine = layoutEngine;
+    console.log('LumaBoard: Layout engine initialized');
+  }
+
+  /**
+   * Set up CSS customizer
+   */
+  setupCSSCustomizer() {
+    this.cssCustomizer = cssCustomizer;
+    
+    // Apply custom CSS from config
+    if (this.config.customCSS) {
+      this.cssCustomizer.applyCustomCSS(this.config.customCSS);
+    }
+    
+    console.log('LumaBoard: CSS customizer initialized');
+  }
+
+  /**
+   * Set up theme manager
+   */
+  setupThemeManager() {
+    this.themeManager = themeManager;
+    console.log('LumaBoard: Theme manager initialized');
   }
 
   /**

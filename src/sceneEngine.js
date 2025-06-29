@@ -168,7 +168,10 @@ export class SceneEngine {
     const layoutContainer = document.createElement('div');
     layoutContainer.className = 'scene-layout';
     
-    switch (layout) {
+    // Normalize layout names
+    const normalizedLayout = layout.replace('grid-', '');
+    
+    switch (normalizedLayout) {
       case '2x2':
         layoutContainer.style.cssText = `
           display: grid;

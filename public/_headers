@@ -1,0 +1,36 @@
+/*
+  # LumaBoard Security Headers
+  # Content Security Policy and additional security headers for production deployment
+  
+  # Content Security Policy - Strict security for LumaBoard
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com data:; img-src 'self' data: https: blob:; media-src 'self' https: blob:; frame-src 'self' https://www.youtube.com https://youtube.com; connect-src 'self' https: wss:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  
+  # Additional Security Headers
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(self), display-capture=()
+  
+  # Cache Control for Security
+  Cache-Control: no-cache, no-store, must-revalidate, max-age=0
+  Pragma: no-cache
+  Expires: 0
+
+# Static Assets - Allow caching for performance
+/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/src/styles/*
+  Cache-Control: public, max-age=86400
+
+# API endpoints - No caching
+/config/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  
+# Development files - Block in production
+/test/*
+  X-Robots-Tag: noindex, nofollow
+  
+*.spec.js
+  X-Robots-Tag: noindex, nofollow 
