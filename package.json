@@ -7,7 +7,16 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "playwright test"
+    "test": "playwright test",
+    "test:accessibility": "playwright test accessibility.spec.js",
+    "test:performance": "playwright test performance.spec.js",
+    "test:errors": "playwright test errorHandling.spec.js",
+    "test:lifecycle": "playwright test lifecycleMethods.spec.js",
+    "test:scene": "playwright test sceneEngine.spec.js",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "test:install": "playwright install"
   },
   "devDependencies": {
     "@playwright/test": "^1.53.1",
