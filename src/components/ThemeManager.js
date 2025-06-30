@@ -14,15 +14,34 @@ export class ThemeManager {
     this.previewMode = false;
     this.originalTheme = null;
     this.listeners = new Set();
+    this.initialized = false;
     
-    this.init();
+    // Don't initialize immediately - wait for explicit call
   }
 
   init() {
-    this.createContainer();
-    this.setupKeyboardShortcuts();
-    this.setupEventListeners();
-    console.log('ThemeManager: Initialized');
+    if (this.initialized) return;
+    
+    // Only initialize if DOM is ready
+    if (document.body) {
+      this.createContainer();
+      this.setupKeyboardShortcuts();
+      this.setupEventListeners();
+      this.initialized = true;
+      console.log('ThemeManager: Initialized');
+    } else {
+      // Wait for DOM to be ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          this.init();
+        });
+      } else {
+        // DOM is ready but body doesn't exist yet, wait a bit
+        setTimeout(() => {
+          this.init();
+        }, 100);
+      }
+    }
   }
 
   createContainer() {
@@ -653,6 +672,9 @@ export class ThemeManager {
   }
 
   show() {
+    if (!this.initialized) {
+      this.init();
+    }
     this.isVisible = true;
     this.container.style.right = '0';
     this.emit('theme-manager-shown');
@@ -665,6 +687,9 @@ export class ThemeManager {
   }
 
   toggle() {
+    if (!this.initialized) {
+      this.init();
+    }
     if (this.isVisible) {
       this.hide();
     } else {
